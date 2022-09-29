@@ -4,14 +4,6 @@ import netfilterqueue as netf
 import time
 import subprocess
 import re
-print("***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***")
-print("\n Welcome to XEye-fr tool, the easy and fast downloads replacer for MiTM attacks ")
-print("[Disclaimer] --> The tool is for Educational and Ethical Hacking purposes - Enjoy .....")
-print("[Recommended --> You are more than welcome to subscribe to our YT channel to help you in learning EH]")
-print("[XEye YT Channel] --> https://www.youtube.com/xeyecs")
-print("***********************************************************************************************")
-time.sleep(1)
-print("\n\n\n[Waiting] --> Waiting for a file to be replaced .......")
 ackaseq = []
 def udte():
     print("\n[Info] --> XEye-fr will check for updates, please wait .....\n\n")
@@ -52,7 +44,15 @@ def Checkroot():
         # time.sleep(3)
         exit(3)
 Checkroot()
+print("***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***XEye***")
+print("\n Welcome to XEye-fr tool, the easy and fast downloads replacer for MiTM attacks ")
+print("[Disclaimer] --> The tool is for Educational and Ethical Hacking purposes - Enjoy .....")
+print("[Recommended --> You are more than welcome to subscribe to our YT channel to help you in learning EH]")
+print("[XEye YT Channel] --> https://www.youtube.com/xeyecs")
+print("***********************************************************************************************")
+time.sleep(1)
 linktf = input("[Required] --> Please enter or paste the link to the malicious file: ")
+print("\n\n\n[Waiting] --> Waiting for a file to be replaced .......")
 def packeting(packets):
     packs = sc.IP(packets.get_payload())
     if packs.haslayer(sc.Raw) and packs.haslayer(sc.TCP):
