@@ -88,7 +88,7 @@ try:
     nfque.bind(3,packeting)
     nfque.run()
 except:
-    print("[Restoring] --> Removing the forward rule...)
+    print("[Restoring] --> Removing the forward rule...")
     subprocess.call("sudo iptables -D FORWARD -j NFQUEUE --queue-num 3",shell=True)
     time.sleep(1)
     print("[❤] --> Thanks for using XEye-fr")
