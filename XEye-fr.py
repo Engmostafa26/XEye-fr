@@ -16,7 +16,6 @@ def udte():
         #print("\n[Congrats] --> the tool is "+str(chked[0].lower()))
         print("[Congrats] --> XEye-fr is already up to date")
         time.sleep(2)
-        packeting()
     else:
         print("\n[Info] --> XEye-fr will be updated, please wait ...... \n")
         time.sleep(1)
