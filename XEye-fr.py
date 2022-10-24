@@ -92,4 +92,8 @@ except:
     print("[Restoring] --> Removing the forward rule...")
     subprocess.call("sudo iptables -D FORWARD -j NFQUEUE --queue-num 3",shell=True)
     time.sleep(1)
+    print("\t\t\t\t[*] Thanks for using XEye-tp. Below are our Social Media OSINT Hacking bundle recommended for you :) [*]")
+    print("\n [***] --> The Ultimate Social Media OSINT Hacking Bundle(70% OFF): https://rb.gy/sgxib8")
+    print("*******************************************************************************************************")
+    print("\n [Author] Eng.Mostafa Ahmad - Cybersecurity Expert and \"XEye\" founder.")
     print("[❤] --> Thanks for using XEye-fr")
