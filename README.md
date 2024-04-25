@@ -9,3 +9,6 @@ With XEye-fr you can replace the download files with common extensions with your
 4- "apt install build-essential python3-dev libnetfilter-queue-dev -y" --> required
 
 The tool needs to run with sudo and with python3 and it needs all the required repositories before you use it. example: sudo python3 XEye-fr.py
+
+Made by [XEye Academy](https://academy.XEyecs.com) for Educational Purposes only.
+
